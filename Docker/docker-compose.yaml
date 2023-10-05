@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    environment:
+      - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=true
+      - GF_PLUGIN_ALLOW_LOCAL_MODE=true
+    ports:
+      - 3000:3000
+    volumes:
+      - ./config/custom.ini:/etc/grafana/custom.ini
+      - grafana_data:/var/lib/grafana
+      - ./logs:/var/log/grafana
+      - ./grafana-simple-json-datasource:/var/lib/grafana/plugins/grafana-simple-json-datasource
+      - ./csv_data:/var/lib/grafana/data/csv
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  grafana_data: {}

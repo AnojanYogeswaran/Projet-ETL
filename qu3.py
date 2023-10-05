@@ -12,7 +12,7 @@ id_occurrences = {}
 with open(fichier_csv, newline='') as csvfile:
     reader = csv.reader(csvfile)
     for row in reader:
-        if len(row) > 4 and row[2]=='5':  
+        if len(row) > 4 :  
             id_5eme_colonne = row[4]
             if id_5eme_colonne in id_occurrences:
                 id_occurrences[id_5eme_colonne] += 1
